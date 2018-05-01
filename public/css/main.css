@@ -1,0 +1,173 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'SegoeUI';
+}
+@font-face {
+  font-family: 'Pokemon Solid';
+  src: url('./fonts/Pokemon Solid.ttf');
+}
+@font-face {
+  font-family: 'SegoeUI Semilight';
+  src: url('./fonts/SegoeUI Semilight.ttf');
+}
+@font-face {
+  font-family: 'SegoeUI';
+  src: url('./fonts/SegoeUI.ttf');
+}
+body {
+  background-image: url('../images/bg.png');
+}
+h1 {
+  font-size: 48px;
+  font-family: 'Pokemon Solid';
+  color: white;
+}
+h3 {
+  font-size: 24px;
+  font-family: 'SegoeUI Semilight';
+  font-weight: 300;
+  color: #4E4E4E;
+}
+header {
+  display: flex;
+  justify-content: center;
+}
+header > .logo {
+  display: flex;
+  width: 350px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo > img {
+  width: 96px;
+  height: 96px;
+}
+section.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 1024px;
+  margin: 0 auto;
+}
+.recipe-preview, 
+.recipe-details,
+.recipe-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 10px;
+  background-color: white;
+  padding: 25px;
+  margin-bottom: 30px;
+}
+.recipe-preview > header, 
+.recipe-details > header,
+.recipe-details > section#versions > header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #E5E5E5;
+}
+.recipe-preview > header > time {
+  font-size: 12px;
+  color: #9B9B9B;
+}
+.recipe-preview > p, .recipe-details > p {
+  margin-top: 10px;
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+.recipe-details > p {
+  margin-bottom: 15px;
+}
+.action-bar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px 0;
+  margin: 15px 0;
+}
+.action-link {
+  display: block;
+  width: 230px;
+  height: 50px;
+  line-height: 48px;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid;
+  font-size: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+.action-link.white {
+  border-color: white;
+  color: white;
+}
+.action-link.green {
+  border-color: #2ECC71;
+  color: #2ECC71;
+}
+.slim-link {
+  border: 1px solid;
+  font-size: 18px;
+}
+.versions-list {
+  display: flex;
+  flex-direction: column;
+}
+.versions-list > .recipe-version {
+  background-color: #E4E4E4;
+  padding: 20px 25px;
+  height: 60px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.recipe-version > time {
+  font-size: 16px;
+}
+.recipe-version > p {
+  margin-top: 20px;
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+.form-field {
+  margin: 15px 0;
+}
+.form-field > input[type="text"],
+.form-field > textarea {
+  height: 45px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #C1C1C1;
+  color: #464646;
+  font-size: 16px;
+}
+.form-field > textarea {
+  height: auto;
+  font-size: 14px;
+  font-family: 'SegoeUI';
+}
+.justify-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 1050px) {
+  section.recipes-list {
+    width: 95%;
+  }
+}
+@media (max-width: 600px) {
+  .action-link {
+    width: 100%;
+  }
+  h1 {
+    font-size: 46px;
+  }
+}
