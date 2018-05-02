@@ -23,9 +23,9 @@ const receive_recipes = response => ({
   response
 });
 
-const formatRecipesResponse = ({ data, next_page_url }) => ({
-  ...normalize(data, [post]),
-  next_page_url
+const formatRecipesResponse = (data) => ({
+  ...normalize(data, [recipe]),
+  next_page_url: null
 })
 
 export const fetchRecipes = () => (dispatch, getState) => {
@@ -33,7 +33,7 @@ export const fetchRecipes = () => (dispatch, getState) => {
 
   dispatch(requets_recipes());
 
-  fetch(next_page_url ? next_page_url : `${API}/recipes` )
+  fetch(next_page_url ? next_page_url : `${API}/recipes`)
     .then(response => response.json())
     .then(json => formatRecipesResponse(json))
     .then(formatted => dispatch(receive_recipes(formatted)));

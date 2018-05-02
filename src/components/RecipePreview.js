@@ -1,13 +1,14 @@
 import React from 'react';
+import moment from 'moment';
 
-export default () => {
+export default ({ recipe: { title, description, created_at }}) => {
   return (
     <article className="recipe-preview">
       <header>
-        <h3>Recipe title</h3>
-        <time dateTime="">time</time>
+        <h3>{title}</h3>
+        <time dateTime="">Added { moment(created_at).fromNow() }</time>
       </header>
-      <p>Description</p>
+      <p>{description}</p>
     </article>
   );
 }
