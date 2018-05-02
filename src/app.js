@@ -2,11 +2,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 import thunk from 'redux-thunk';
 import RecipesList from './components/RecipesList';
 import Recipe from './components/Recipe';
 import AddRecipe from './components/AddRecipe';
+import EditRecipe from './components/EditRecipe';
 import entities from './reducers/entities.js';
 import pagination from './reducers/pagination.js';
 
