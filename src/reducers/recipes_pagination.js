@@ -3,7 +3,7 @@ import union from 'lodash/union';
 
 const default_state = {
   isFetching: false,
-  next_page_url: undefined,
+  nextPage: undefined,
   ids: []
 };
 
@@ -18,7 +18,7 @@ export default (state = default_state, action) => {
       return {
         ...state,
         isFetching: false,
-        next_page_url: action.response.next_page_url,
+        nextPage: action.response.nextPage,
         ids: union(state.ids, action.response.result)
       };
     default:

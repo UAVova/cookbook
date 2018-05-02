@@ -17,7 +17,7 @@ export default (state = {}, action) => {
         [action.response.recipeId]: {
           isFetching: false,
           ids: union(state[action.response.recipeId].ids, action.response.result),
-          next_page_url: action.response.next_page_url
+          nextPage: action.response.nextPage
         }
       }
     default:

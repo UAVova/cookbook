@@ -2,13 +2,32 @@ import mongoose from 'mongoose';
 import './models/Recipe';
 
 const Recipe = mongoose.model('Recipe');
+const RECIPES_PER_PAGE = 6;
 
 export function setUpConnection() {
   mongoose.connect(`mongodb://localhost/cookbook`);
 }
 
-export function getRecipesList() {
-  return Recipe.find();
+export async function getRecipesList(page) {
+  const records = await Recipe.count();
+  const maxPages = Math.ceil(records / RECIPES_PER_PAGE);
+
+  if (page > maxPages)
+    return [];
+
+  const skipCount = page * RECIPES_PER_PAGE - RECIPES_PER_PAGE;
+  const recipes = Recipe.find()
+          .sort({created_at: -1})
+          .skip(skipCount)
+          .limit(RECIPES_PER_PAGE);
+  
+  const nextPage = page + 1 > maxPages
+    ? null
+    : page + 1;
+
+  return new Promise(resolve => {
+    recipes.then(data => resolve({nextPage, data}));
+  });
 }
 
 export function getRecipe() {

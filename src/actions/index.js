@@ -23,17 +23,17 @@ const receive_recipes = response => ({
   response
 });
 
-const formatRecipesResponse = (data) => ({
+const formatRecipesResponse = ({data, nextPage}) => ({
   ...normalize(data, [recipe]),
-  next_page_url: null
+  nextPage
 })
 
 export const fetchRecipes = () => (dispatch, getState) => {
-  const { next_page_url } = getState().pagination.recipes;
+  const { nextPage } = getState().pagination.recipes;
 
   dispatch(requets_recipes());
 
-  fetch(next_page_url ? next_page_url : `${API}/recipes`)
+  fetch(nextPage ? `${API}/recipes/${nextPage}` : `${API}/recipes`)
     .then(response => response.json())
     .then(json => formatRecipesResponse(json))
     .then(formatted => dispatch(receive_recipes(formatted)));

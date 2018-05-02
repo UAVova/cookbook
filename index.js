@@ -14,8 +14,14 @@ app.use(cors({ origin: '*' }));
 
 db.setUpConnection();
 
-app.get('/api/recipes', (req, res) => {
-  db.getRecipesList().then(list => res.send(list))
+app.get('/api/recipes/:page?', async (req, res) => {
+  const { page } = req.params;
+
+  if (!+page || page < 0)
+    return db.getRecipesList(1)
+           .then(data => res.send(data));
+  
+  return db.getRecipesList(+page).then(list => res.send(list));
 });
 
 app.post('/api/recipes', (req, res) => {
