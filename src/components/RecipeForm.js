@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {
+  MIN_TITLE_LENGTH,
+  MAX_TITLE_LENGTH,
+  MIN_DESCRIPTION_LENGTH,
+  MAX_DESCRIPTION_LENGTH
+} from '../config/';
 
 class RecipeForm extends Component {
   constructor(props) {
@@ -64,9 +70,9 @@ class RecipeForm extends Component {
           </header>
           <div className="form-field">
             <input 
-              pattern=".{6,80}"
+              pattern={`.{${MIN_TITLE_LENGTH},${MAX_TITLE_LENGTH}}`}
               required
-              title="6 to 80 characters"
+              title={`${MIN_TITLE_LENGTH} to ${MAX_TITLE_LENGTH} characters`}
               name="title"
               type="text"
               onChange={this.handleInputChange} 
@@ -75,8 +81,8 @@ class RecipeForm extends Component {
           </div>
           <div className="form-field">
             <textarea 
-              minLength="50"
-              maxLength="3000"
+              minLength={MIN_DESCRIPTION_LENGTH}
+              maxLength={MAX_DESCRIPTION_LENGTH}
               required 
               name="description" 
               rows="10" 

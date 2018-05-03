@@ -3,3 +3,7 @@ export const PORT = '8080';
 export const ENDPOINT = 'api';
 export const API = `http://${HOST}:${PORT}/${ENDPOINT}`;
 export const RECIPES_PER_PAGE = 6;
+export const MIN_TITLE_LENGTH = 6;
+export const MAX_TITLE_LENGTH = 80;
+export const MIN_DESCRIPTION_LENGTH = 50;
+export const MAX_DESCRIPTION_LENGTH = 3000;

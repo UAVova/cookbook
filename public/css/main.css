@@ -164,6 +164,7 @@ section.wrapper {
 }
 .form-field > textarea {
   height: auto;
+  max-width: 100%;
   font-size: 14px;
   font-family: 'SegoeUI';
 }
