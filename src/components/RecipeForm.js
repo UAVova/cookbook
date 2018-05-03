@@ -7,7 +7,17 @@ class RecipeForm extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    console.log(this.props);
+
+    if (props.fetchRecipe)
+      props.fetchRecipe(props.match.params.recipe);
+    
+    const template = {title: '', description: ''};
+    const { title, description } = props.recipe || template;
+
+    this.state = {
+      title,
+      description
+    }
   }
   
   handleInputChange(event) {
@@ -22,15 +32,29 @@ class RecipeForm extends Component {
     e.preventDefault();
 
     const { title, description } = this.state;
-    const { url, method } = this.props;
+    const { url, method, recipe } = this.props;
+
+    const redirectUrl = recipe ? `/${recipe._id}` : '/';
     
     this.props
       .submitFunction({ fields: {title, description}, url, method})
-      .then(() => this.props.history.push('/'));
+      .then(() => this.props.history.push(redirectUrl));
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { recipe } = nextProps;
+
+    if (recipe)
+      return {
+        title: recipe.title,
+        description: recipe.description
+      }
+    
+    return null;
   }
 
   render() {
-    const { title, buttonCaption } = this.props;
+    const { title, buttonCaption, recipe } = this.props;
 
     return (
       <form onSubmit={ this.handleSubmit }>
@@ -46,6 +70,7 @@ class RecipeForm extends Component {
               name="title"
               type="text"
               onChange={this.handleInputChange} 
+              value={this.state.title}
             />
           </div>
           <div className="form-field">
@@ -56,6 +81,7 @@ class RecipeForm extends Component {
               name="description" 
               rows="10" 
               onChange={this.handleInputChange}
+              value={this.state.description}
             ></textarea>
           </div>
           <div className="form-field justify-end">

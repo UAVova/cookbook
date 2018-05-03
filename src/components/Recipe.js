@@ -17,7 +17,9 @@ class Recipe extends Component {
   }
 
   generateVersions() {
-    return this.props.versions.map(version => {
+    return this.props.versions
+      .sort((a,b) =>  Date.parse(b.created_at) - Date.parse(a.created_at))
+      .map(version => {
       return <RecipeVersion key={version._id} handleClick={this.openVersion} {...version} />
     });
   }

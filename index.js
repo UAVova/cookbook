@@ -32,6 +32,11 @@ app.get('/api/recipes/:id/show', (req, res) => {
   .catch(err => res.send({status: "error", error: err}));
 });
 
+app.put('/api/recipes/:id/edit', (req, res) => {
+  db.editRecipe(req.params.id, req.body)
+    .then(recipe => res.send({status: "success", data: recipe}));
+});
+
 app.get('/api/recipes/:id/versions', async (req, res) => {
   const versions = await db.getRecipeVersions(req.params.id);
   

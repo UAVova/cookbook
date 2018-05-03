@@ -64,7 +64,7 @@ export const fetchRecipeVersions = (recipeId) => (dispatch, getState) => {
     .then(normalized => dispatch(receive_versions(normalized)))
 }
 
-export const createRecipe = data => (dispatch, getState) => {
+export const sendRecipe = data => (dispatch, getState) => {
   const { fields, method, url } = data;
 
   let body = Object.keys(fields).map(id => {

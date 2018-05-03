@@ -1,7 +1,7 @@
 import React from 'react';
 import RecipeForm from './RecipeForm';
 import { API } from '../actions/';
-import { createRecipe } from '../actions/';
+import { sendRecipe } from '../actions/';
 import { connect } from 'react-redux';
 
 const AddRecipe = ({ history, submitFunction }) => {
@@ -17,4 +17,4 @@ const AddRecipe = ({ history, submitFunction }) => {
   return <RecipeForm {...options} />;
 }
 
-export default connect(null, { submitFunction: createRecipe })(AddRecipe);
+export default connect(null, { submitFunction: sendRecipe })(AddRecipe);

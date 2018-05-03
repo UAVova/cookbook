@@ -72,6 +72,7 @@ export async function editRecipe(id, data) {
   recipe.description = data.description;
   recipe.versions.push(version._id);
 
+
   return recipe.save();
 }
 
@@ -93,7 +94,7 @@ export async function getRecipeVersions(recipeId) {
 
   const versions = await RecipeVersion.find({
     '_id': { $in: recipe.versions }
-  }).sort({ created_at: -1 });
+  });
 
   return versions;
 }
