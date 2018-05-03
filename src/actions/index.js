@@ -13,7 +13,7 @@ const comment = new schema.Entity('comments', {
   versions: [version]
 });
 
-const API = 'http://localhost:8080/api'; // will be replaced soon
+export const API = 'http://localhost:8080/api'; // will be replaced soon
 
 const requets_recipes = () => ({
   type: REQUEST_RECIPES
@@ -62,4 +62,20 @@ export const fetchRecipeVersions = (recipeId) => (dispatch, getState) => {
     .then(response => response.json())
     .then(json => normalize(json, [version]))
     .then(normalized => dispatch(receive_versions(normalized)))
+}
+
+export const createRecipe = data => (dispatch, getState) => {
+  const { fields, method, url } = data;
+
+  let body = Object.keys(fields).map(id => {
+    return encodeURIComponent(id) + '=' + encodeURIComponent(fields[id]);
+  }).join('&')
+
+  return fetch(url, {
+    method,
+    body,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    }
+  });
 }

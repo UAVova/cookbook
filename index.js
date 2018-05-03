@@ -34,13 +34,14 @@ app.get('/api/recipes/:id/show', (req, res) => {
 
 app.get('/api/recipes/:id/versions', async (req, res) => {
   const versions = await db.getRecipeVersions(req.params.id);
-  res.send(versions)
+  
+  res.send(versions);
 });
 
 app.post('/api/recipes', (req, res) => {
   db.createRecipe(req.body)
     .then(data => res.send({status: "success", data}))
-    .catch(err => res.send({status: "error", error: parseErrors(err)}));
+    .catch(err => res.send({status: "error", error: db.parseErrors(err)}));
 });
 
 app.delete('/api/recipes/:id', (req, res) => {

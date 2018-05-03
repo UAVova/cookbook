@@ -24,8 +24,8 @@ render(
     <Router>
       <Switch>
         <Route exact path='/' component={RecipesList} />
+        <Route exact path='/recipes/add' component={AddRecipe} />
         <Route exact path='/:recipe' component={Recipe} />
-        <Route exact path='/add' component={AddRecipe} />
         <Route exact path='/:recipe/edit' component={EditRecipe} />
       </Switch>
     </Router>
