@@ -1,5 +1,6 @@
 import { normalize, schema } from 'normalizr';
 import merge from 'lodash/merge';
+import { API } from '../config/';
 
 export const REQUEST_RECIPES = 'REQUEST_RECIPES';
 export const RECEIVE_RECIPES = 'RECEIVE_RECIPES';
@@ -12,8 +13,6 @@ const version = new schema.Entity('versions', {}, { idAttribute: '_id' });
 const comment = new schema.Entity('comments', {
   versions: [version]
 });
-
-export const API = 'http://localhost:8080/api'; // will be replaced soon
 
 const requets_recipes = () => ({
   type: REQUEST_RECIPES

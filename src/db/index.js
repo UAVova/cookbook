@@ -1,11 +1,10 @@
 import mongoose from 'mongoose';
 import './models/Recipe';
 import './models/RecipeVersion';
+import { RECIPES_PER_PAGE } from '../config/';
 
 const Recipe = mongoose.model('Recipe');
 const RecipeVersion = mongoose.model('RecipeVersion');
-
-const RECIPES_PER_PAGE = 6;
 
 export function setUpConnection() {
   mongoose.connect(`mongodb://localhost/cookbook`);

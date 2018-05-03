@@ -1,6 +1,6 @@
 import React from 'react';
 import RecipeForm from './RecipeForm';
-import { API } from '../actions/';
+import { API } from '../config/';
 import { sendRecipe } from '../actions/';
 import { connect } from 'react-redux';
 
