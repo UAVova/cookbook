@@ -127,6 +127,9 @@ section.wrapper {
   overflow: hidden;
   margin-top: 10px;
 }
+.versions-list > .recipe-version.opened {
+  height: 100%;
+}
 .recipe-version > time {
   font-size: 16px;
 }
@@ -159,7 +162,7 @@ section.wrapper {
 }
 
 @media (max-width: 1050px) {
-  section.recipes-list {
+  section.wrapper {
     width: 95%;
   }
 }

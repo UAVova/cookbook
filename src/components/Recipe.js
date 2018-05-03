@@ -12,9 +12,13 @@ class Recipe extends Component {
     this.props.fetchRecipeVersions(recipe)
   }
 
+  openVersion(e) {
+    e.target.classList.add('opened');
+  }
+
   generateVersions() {
     return this.props.versions.map(version => {
-      return <RecipeVersion id={version._id} {...version} />
+      return <RecipeVersion key={version._id} handleClick={this.openVersion} {...version} />
     });
   }
 
