@@ -23,10 +23,10 @@ render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path='/' component={RecipesList} />
         <Route exact path='/recipes/add' component={AddRecipe} />
-        <Route exact path='/:recipe' component={Recipe} />
-        <Route exact path='/:recipe/edit' component={EditRecipe} />
+        <Route exact path='/recipes/:recipe' component={Recipe} />
+        <Route exact path='/recipes/:recipe/edit' component={EditRecipe} />
+        <Route component={RecipesList} />
       </Switch>
     </Router>
   </Provider>

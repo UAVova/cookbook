@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchRecipe, fetchRecipeVersions } from '../actions/';
 import { getRecipeVersions } from '../selectors/';
 import { Link } from 'react-router-dom';
+import Loader from './Loader';
 
 class Recipe extends Component {
   componentDidMount() {
@@ -31,7 +32,8 @@ class Recipe extends Component {
     return (
       <Fragment>
         <div className="action-bar">
-        <Link to="/recipes/add" className="action-link white" >Add recipe</Link>
+          <Link to="/" className="action-link red" >{"< Back"}</Link>
+          <Link to="/recipes/add" className="action-link blue" >Add recipe</Link>
         </div>
         <article className="recipe-details">
           { recipe
@@ -39,6 +41,7 @@ class Recipe extends Component {
                 <Fragment>
                   <header>
                     <h3>{recipe.title}</h3>
+                    <div className="action">[<Link to={`/recipes/${recipe._id}/edit`}>Edit Recipe</Link>]</div>
                   </header>
                   <p>{recipe.description}</p>
 
@@ -53,7 +56,7 @@ class Recipe extends Component {
                       </section>
                   }
                 </Fragment>
-              : 'Loading recipe...'
+              : <Loader />
           }
         </article>
       </Fragment>

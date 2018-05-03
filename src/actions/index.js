@@ -43,16 +43,19 @@ export const fetchRecipes = (page) => (dispatch, getState) => {
   const { nextPage } = getState().pagination.recipes;
 
   dispatch(requets_recipes());
-  console.log(page);
+
   const url = page 
     ? `${API}/recipes/${page}`
     : nextPage 
       ? `${API}/recipes/${nextPage}` 
       : `${API}/recipes`;
-  console.log(url);
+      
   fetch(url)
     .then(response => response.json())
-    .then(json => formatRecipesResponse(json))
+    .then(json => {
+      json = json.data ? json : {data: json};
+      return formatRecipesResponse(json)
+    })
     .then(formatted => dispatch(receive_recipes(formatted)));
 }
 

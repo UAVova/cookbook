@@ -5,6 +5,8 @@ import { fetchRecipes } from '../actions/index';
 import RecipePreview from './RecipePreview';
 import Waypoint from 'react-waypoint';
 import { Link } from 'react-router-dom';
+import Loader from './Loader';
+import RecipesPlaceholder from './RecipesPlaceholder';
 
 class RecipesList extends Component {
   componentDidMount() {
@@ -36,18 +38,19 @@ class RecipesList extends Component {
   }
 
   render() {
-
+    const isEmpty = !this.props.isFetching && this.props.recipes.length === 0;
+    
     return (
       <Fragment>
         <div className="action-bar">
-          <Link to="/recipes/add" className="action-link white" >Add recipe</Link>
+          <Link to="/recipes/add" className="action-link blue" >Add recipe</Link>
         </div>
         {
-          this.props.recipes 
-            ? this.recipesList()
-            : ''
+          isEmpty
+            ? <RecipesPlaceholder />
+            : this.recipesList()
         }
-        {this.props.isFetching && 'Loading posts...'}
+        {this.props.isFetching && <Loader />}
       </Fragment>
     )
   }

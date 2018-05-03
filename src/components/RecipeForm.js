@@ -34,7 +34,7 @@ class RecipeForm extends Component {
     const { title, description } = this.state;
     const { url, method, recipe } = this.props;
 
-    const redirectUrl = recipe ? `/${recipe._id}` : '/';
+    const redirectUrl = recipe ? `/recipes/${recipe._id}` : '/';
     
     this.props
       .submitFunction({ fields: {title, description}, url, method})
@@ -85,6 +85,7 @@ class RecipeForm extends Component {
             ></textarea>
           </div>
           <div className="form-field justify-end">
+            <button className="action-link red slim-link" onClick={() => this.props.history.goBack()} > {"< Back "}</button>
             <input type="submit" className="action-link green slim-link" value={ buttonCaption } />
           </div>
         </div>
