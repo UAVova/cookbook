@@ -15,7 +15,7 @@ const RecipeSchema = new mongoose.Schema({
     required: [true, 'Description is required']
   },
   versions: [{
-    type: Types.ObjectId, ref: 'RecipeVersion'
+    type: String
   }],
   created_at: {
     type: Date,

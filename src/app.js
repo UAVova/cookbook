@@ -23,9 +23,9 @@ render(
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route path='/' component={RecipesList} />
+        <Route exact path='/' component={RecipesList} />
         <Route exact path='/:recipe' component={Recipe} />
-        <Route path='/add' component={AddRecipe} />
+        <Route exact path='/add' component={AddRecipe} />
         <Route exact path='/:recipe/edit' component={EditRecipe} />
       </Switch>
     </Router>

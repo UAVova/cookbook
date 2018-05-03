@@ -3,8 +3,9 @@ import merge from 'lodash/merge';
 
 export const REQUEST_RECIPES = 'REQUEST_RECIPES';
 export const RECEIVE_RECIPES = 'RECEIVE_RECIPES';
+export const RECEIVE_RECIPE = 'RECEIVE_RECIPE';
 export const REQUEST_VERSIONS = 'REQUEST_VERSIONS';
-export const RECEIVE_VERSIONS = 'RECEIVE_RECIPE';
+export const RECEIVE_VERSIONS = 'RECEIVE_VERSIONS';
 
 const recipe = new schema.Entity('recipes', {}, { idAttribute: '_id' });
 const version = new schema.Entity('versions', {}, { idAttribute: '_id' });
@@ -23,6 +24,16 @@ const receive_recipes = response => ({
   response
 });
 
+const receive_recipe = response => ({
+  type: RECEIVE_RECIPE,
+  response
+});
+
+const receive_versions = response => ({
+  type: RECEIVE_VERSIONS,
+  response
+});
+
 const formatRecipesResponse = ({data, nextPage}) => ({
   ...normalize(data, [recipe]),
   nextPage
@@ -37,4 +48,18 @@ export const fetchRecipes = () => (dispatch, getState) => {
     .then(response => response.json())
     .then(json => formatRecipesResponse(json))
     .then(formatted => dispatch(receive_recipes(formatted)));
+}
+
+export const fetchRecipe = (id) => (dispatch, getState) => {
+  fetch(`${API}/recipes/${id}/show`)
+    .then(response => response.json())
+    .then(json => normalize(json.data, recipe))
+    .then(normalized => dispatch(receive_recipe(normalized)));
+}
+
+export const fetchRecipeVersions = (recipeId) => (dispatch, getState) => {
+  fetch(`${API}/recipes/${recipeId}/versions`)
+    .then(response => response.json())
+    .then(json => normalize(json, [version]))
+    .then(normalized => dispatch(receive_versions(normalized)))
 }
