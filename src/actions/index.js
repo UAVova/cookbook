@@ -39,12 +39,18 @@ const formatRecipesResponse = ({data, nextPage}) => ({
   nextPage
 })
 
-export const fetchRecipes = () => (dispatch, getState) => {
+export const fetchRecipes = (page) => (dispatch, getState) => {
   const { nextPage } = getState().pagination.recipes;
 
   dispatch(requets_recipes());
-
-  fetch(nextPage ? `${API}/recipes/${nextPage}` : `${API}/recipes`)
+  console.log(page);
+  const url = page 
+    ? `${API}/recipes/${page}`
+    : nextPage 
+      ? `${API}/recipes/${nextPage}` 
+      : `${API}/recipes`;
+  console.log(url);
+  fetch(url)
     .then(response => response.json())
     .then(json => formatRecipesResponse(json))
     .then(formatted => dispatch(receive_recipes(formatted)));
@@ -69,7 +75,7 @@ export const sendRecipe = data => (dispatch, getState) => {
 
   let body = Object.keys(fields).map(id => {
     return encodeURIComponent(id) + '=' + encodeURIComponent(fields[id]);
-  }).join('&')
+  }).join('&');
 
   return fetch(url, {
     method,
@@ -77,5 +83,7 @@ export const sendRecipe = data => (dispatch, getState) => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
     }
-  });
+  }).then(response => response.json())
+    .then(json => normalize(json.data, recipe))
+    .then(normalized => dispatch(receive_recipe(normalized)));
 }

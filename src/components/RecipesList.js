@@ -4,14 +4,15 @@ import { getAllRecipes } from '../selectors/index';
 import { fetchRecipes } from '../actions/index';
 import RecipePreview from './RecipePreview';
 import Waypoint from 'react-waypoint';
+import { Link } from 'react-router-dom';
 
 class RecipesList extends Component {
   componentDidMount() {
-    this.fetchRecipes();
+    this.fetchRecipes(1);
   }
 
-  fetchRecipes() {
-    this.props.fetchRecipes();
+  fetchRecipes(page) {
+    this.props.fetchRecipes(page);
   }
 
   recipesList() {
@@ -27,18 +28,25 @@ class RecipesList extends Component {
   }
 
   generateRecipes() {
-    return this.props.recipes.map(recipe => {
-      return <RecipePreview key={recipe._id} {...recipe}/>
-    })
+    return this.props.recipes
+      .sort((a,b) =>  Date.parse(b.created_at) - Date.parse(a.created_at))
+      .map(recipe => {
+        return <RecipePreview key={recipe._id} {...recipe}/>
+      })
   }
 
   render() {
+
     return (
       <Fragment>
         <div className="action-bar">
-          <a href="#" className="action-link white">Add recipe</a>
+          <Link to="/recipes/add" className="action-link white" >Add recipe</Link>
         </div>
-        {this.recipesList()}
+        {
+          this.props.recipes 
+            ? this.recipesList()
+            : ''
+        }
         {this.props.isFetching && 'Loading posts...'}
       </Fragment>
     )

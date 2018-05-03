@@ -3,6 +3,7 @@ import RecipeVersion from './RecipeVersion';
 import { connect } from 'react-redux';
 import { fetchRecipe, fetchRecipeVersions } from '../actions/';
 import { getRecipeVersions } from '../selectors/';
+import { Link } from 'react-router-dom';
 
 class Recipe extends Component {
   componentDidMount() {
@@ -30,7 +31,7 @@ class Recipe extends Component {
     return (
       <Fragment>
         <div className="action-bar">
-          <a href="#" className="action-link white">Add recipe</a>
+        <Link to="/recipes/add" className="action-link white" >Add recipe</Link>
         </div>
         <article className="recipe-details">
           { recipe
