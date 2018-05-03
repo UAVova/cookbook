@@ -23,7 +23,7 @@ class Recipe extends Component {
   }
 
   render() {
-    const { recipe } = this.props;
+    const { recipe, versions } = this.props;
 
     return (
       <Fragment>
@@ -38,14 +38,17 @@ class Recipe extends Component {
                     <h3>{recipe.title}</h3>
                   </header>
                   <p>{recipe.description}</p>
-                  <section id="versions">
-                    <header>
-                      <h3>Previous versions</h3>
-                    </header>
-                    <div className="versions-list">
-                      { this.generateVersions() }
-                    </div>
-                  </section>
+
+                  { !!versions.length &&
+                      <section id="versions">
+                        <header>
+                          <h3>Previous versions</h3>
+                        </header>
+                        <div className="versions-list">
+                          { this.generateVersions() }
+                        </div>
+                      </section>
+                  }
                 </Fragment>
               : 'Loading recipe...'
           }

@@ -160,6 +160,10 @@ section.wrapper {
   display: flex;
   justify-content: flex-end;
 }
+a {
+  text-decoration: none;
+  color: #4E4E4E;
+}
 
 @media (max-width: 1050px) {
   section.wrapper {

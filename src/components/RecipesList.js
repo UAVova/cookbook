@@ -28,7 +28,7 @@ class RecipesList extends Component {
 
   generateRecipes() {
     return this.props.recipes.map(recipe => {
-      return <RecipePreview key={recipe._id} recipe={recipe}/>
+      return <RecipePreview key={recipe._id} {...recipe}/>
     })
   }
 
